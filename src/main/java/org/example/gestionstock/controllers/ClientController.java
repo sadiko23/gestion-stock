@@ -13,7 +13,6 @@ import java.util.List;
 
 public class ClientController {
     @Autowired
-
     public ClientService clientService;
 
     @GetMapping("revenue")
@@ -22,8 +21,10 @@ public class ClientController {
         return  clientService.revenue();
     }
     @GetMapping("Clients")
+    @CrossOrigin("*")
     public List<Client> getClients(){
         return  clientService.findAll();
     }
+
 
 }

@@ -44,34 +44,34 @@ public class CommandeController {
 
 
     }
-    @GetMapping("/test")
-    public String test(){
-        ProduitFinis produitFinis=new ProduitFinis();
-
-        produitFinis.setDescription("test");
-        produitFinis.setPrix(100);
-        produitFinis.setQuantite(2);
-        produitFinis.setReferance("fvvfred");
-        DetailCommandeClient detailCommandeClient=new DetailCommandeClient();
-
-        produitFinis=produiFiniService.add(produitFinis);
-
-        CommandeClient commandeClient=commandeClientService.findById(53);
-        System.out.println(commandeClient.getDescription());
-
-
-        detailCommandeClient.setProduits(produitFinis);
-        detailCommandeClient.setQuantite(2);
-        detailCommandeClient.setCommande(commandeClient);
-        detailCommandeClientService.add(detailCommandeClient);
-
-
-
-
-        return "hi";
-
-
-    }
+//    @GetMapping("/test")
+//    public String test(){
+//        ProduitFinis produitFinis=new ProduitFinis();
+//
+//        produitFinis.setDescription("test");
+//        produitFinis.setPrix(100);
+//        produitFinis.setQuantite(2);
+//        produitFinis.setReferance("fvvfred");
+//        DetailCommandeClient detailCommandeClient=new DetailCommandeClient();
+//
+//        produitFinis=produiFiniService.add(produitFinis);
+//
+//        CommandeClient commandeClient=commandeClientService.findById(53);
+//        System.out.println(commandeClient.getDescription());
+//
+//
+//        detailCommandeClient.setProduits(produitFinis);
+//        detailCommandeClient.setQuantite(2);
+//        detailCommandeClient.setCommande(commandeClient);
+//        detailCommandeClientService.add(detailCommandeClient);
+//
+//
+//
+//
+//        return "hi";
+//
+//
+//    }
     @GetMapping("Client")
     @CrossOrigin("*")
     public List<CommandeClient> getCommandeFournisseur(){

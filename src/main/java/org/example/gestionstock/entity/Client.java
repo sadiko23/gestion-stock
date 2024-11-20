@@ -1,10 +1,12 @@
 package org.example.gestionstock.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
+@Data
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
