@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServive {
+public class UserService {
     @Autowired
     private UserRepo userRepo;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -33,5 +33,9 @@ public class UserServive {
     }
     public List<Users> getUsers(){
         return (List<Users>) userRepo.findAll();
+    }
+    public void delete(int id){
+        userRepo.deleteById(id);
+
     }
 }

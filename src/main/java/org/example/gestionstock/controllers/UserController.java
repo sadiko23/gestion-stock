@@ -1,16 +1,15 @@
 package org.example.gestionstock.controllers;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.example.gestionstock.entity.Users;
-import org.example.gestionstock.service.UserServive;
+import org.example.gestionstock.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpRequest;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @RestController
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
@@ -20,11 +19,11 @@ public class UserController
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private UserServive userServive;
+    private UserService userService;
     @PostMapping("login")
     @CrossOrigin(origins = "*")
     public Users login(@RequestParam String username, @RequestParam String password){
-        Users user = userServive.login(username,password);
+        Users user = userService.login(username,password);
         if (user == null){
             return null;
         }else{
@@ -35,17 +34,14 @@ public class UserController
     @GetMapping("nombre")
     @CrossOrigin(origins = "*")
     public int  nombre(){
-        return userServive.nombre();
+        return userService.nombre();
     }
-    @GetMapping("addUser")
+    @PostMapping("addUser")
     @CrossOrigin("*")
-    public boolean addUser(@RequestParam String email, @RequestParam String password, @RequestParam String nom, @RequestParam String role,@RequestParam String direction){
-        Users user = new Users();
-        user.setNom(nom);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setRole(role);
-        user.setDirection(direction);
-        return userServive.addUser(user);
+    public boolean addUser(@RequestBody Users  user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        return userService.addUser(user);
 
 
     }
@@ -54,7 +50,17 @@ public class UserController
     @GetMapping("users")
     @CrossOrigin("*")
     public List<Users> getUsers(){
-        return userServive.getUsers();
+        return userService.getUsers();
+    }
+
+    @DeleteMapping("deleteUser")
+    @CrossOrigin("*")
+    public void deleteUser(@RequestBody Map id){
+        int idval=(int)id.get("id");
+
+        userService.delete(idval);
+        System.out.println("eliminando el user : "+idval);
+        return;
     }
 
 
